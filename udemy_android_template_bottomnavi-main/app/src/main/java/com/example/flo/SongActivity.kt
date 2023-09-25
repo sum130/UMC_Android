@@ -1,6 +1,9 @@
 package com.example.flo
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.databinding.ActivitySongBinding
@@ -12,7 +15,13 @@ class SongActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySongBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         binding.songDownIb.setOnClickListener{
+            val intent = Intent(this, SongActivity::class.java)
+            intent.putExtra("title", binding.songMusicTitleTv.text)
+            intent.putExtra("singer", binding.songSingerNameTv.text)
+            //startActivity(intent)
+            setResult(Activity.RESULT_OK, intent)
             finish()
         }
 
@@ -22,6 +31,7 @@ class SongActivity : AppCompatActivity() {
         binding.songPauseIv.setOnClickListener{
             setPlayerStatus(true)
         }
+
         if(intent.hasExtra("title")&& intent.hasExtra("singer")){
             binding.songMusicTitleTv.text= intent.getStringExtra("title")
             binding.songSingerNameTv.text= intent.getStringExtra("singer")
