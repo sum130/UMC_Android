@@ -1,6 +1,7 @@
 package com.example.flo
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,10 @@ class AlbumFragment : Fragment() {
         binding.songLalacLayout.setOnClickListener{
             Toast.makeText(activity, "LILAC", Toast.LENGTH_SHORT).show()
         }
+        binding.albumMusicTitleTv.text = arguments?.getString("title")
+        binding.albumSingerNameTv.text = arguments?.getString("singer")
+        Log.d("album", arguments?.getString("title") + arguments?.getString("singer") )
+
 
         return binding.root
     }

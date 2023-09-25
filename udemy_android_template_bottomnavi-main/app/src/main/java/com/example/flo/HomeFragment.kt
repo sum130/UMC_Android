@@ -18,8 +18,15 @@ class HomeFragment : Fragment() {
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
 
+
+
         binding.homePannelTodayAlbumIv.setOnClickListener{
-            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.main_frm, AlbumFragment()).commitAllowingStateLoss()
+            var bundle = Bundle()
+            bundle.putString("title", binding.homePannelTodayAlbumTitleTv.text.toString())
+            bundle.putString("singer", binding.homePannelTodayAlbumSingerTv.text.toString())
+            val albumFragment = AlbumFragment()
+            albumFragment.arguments = bundle
+            (context as MainActivity).supportFragmentManager.beginTransaction().replace(R.id.main_frm, albumFragment).commitAllowingStateLoss()
         }
         return binding.root
     }
