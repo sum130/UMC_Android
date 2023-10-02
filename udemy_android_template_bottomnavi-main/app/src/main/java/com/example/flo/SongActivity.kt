@@ -25,6 +25,14 @@ class SongActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.songRepeatIv.setOnClickListener {
+            setPlayStatus(false)
+        }
+        binding.songRandomIv.setOnClickListener {
+            setPlayStatus(true)
+        }
+
+
         binding.songMiniplayerIv.setOnClickListener{
             setPlayerStatus(false)
         }
@@ -45,6 +53,17 @@ class SongActivity : AppCompatActivity() {
         else{
             binding.songMiniplayerIv.visibility = View.GONE
             binding.songPauseIv.visibility = View.VISIBLE
+        }
+    }
+
+    fun setPlayStatus(isPlaying: Boolean){
+        if(isPlaying){
+            binding.songRepeatIv.visibility = View.VISIBLE
+            binding.songRandomIv.visibility = View.GONE
+        }
+        else{
+            binding.songRepeatIv.visibility = View.GONE
+            binding.songRandomIv.visibility = View.VISIBLE
         }
     }
 }
