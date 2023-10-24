@@ -117,7 +117,9 @@ class SongActivity : AppCompatActivity() {
                 while(second<playTime){
                     if(isPlaying){
                         Thread.sleep(1000)
+                        mills += 50
                         runOnUiThread(){
+                            binding.songProgressSb.progress = ((second /playTime)*100).toInt()
                             binding.songStartTimeTv.text =
                                 String.format("%02d:%02d", second / 60, second % 60)
                             binding.songEndTimeTv.text =
