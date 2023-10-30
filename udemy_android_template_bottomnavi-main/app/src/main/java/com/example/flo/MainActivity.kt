@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(), 0,60,false, "music_Night")
+        //val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(), 0,60,false, "bam")
 
 
         binding.mainPlayerCl.setOnClickListener{
@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("isPlaying", song.isPlaying)
             intent.putExtra("music", song.music)
             startActivity(intent)
-            getResultText.launch(intent)
         }
 
         getResultText.launch(intent)
@@ -99,7 +98,7 @@ class MainActivity : AppCompatActivity() {
     private fun setMiniPlayer(song: Song){
         binding.mainMiniplayerSingerTv.text = song.singer
         binding.mainMiniplayerTitleTv.text = song.title
-        binding.seekBar.progress = (song.second*100000)/song.playTime
+        binding.seekBar.progress = (song.second*1000)/song.playTime
     }
     override fun onStart() {
         super.onStart()
@@ -107,7 +106,7 @@ class MainActivity : AppCompatActivity() {
         val songJson = sharedPreferences.getString("songData", null)
 
         song = if(songJson ==null){
-            Song("밤", "dori", 0, 60, false, "music_Night")
+            Song("밤", "dori", 0, 60, false, "bam")
         }else{
             gson.fromJson(songJson, Song::class.java)
         }

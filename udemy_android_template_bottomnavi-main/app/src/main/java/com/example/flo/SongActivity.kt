@@ -44,10 +44,10 @@ class SongActivity : AppCompatActivity() {
 
 
         binding.songMiniplayerIv.setOnClickListener{
-            setPlayerStatus(false)
+            setPlayerStatus(true)
         }
         binding.songPauseIv.setOnClickListener{
-            setPlayerStatus(true)
+            setPlayerStatus(false)
         }
     }
 
@@ -92,7 +92,7 @@ class SongActivity : AppCompatActivity() {
         binding.songSingerNameTv.text= intent.getStringExtra("singer")!!
         binding.songStartTimeTv.text = String.format("%02d:%02d", song.second /60, song.second%60)
         binding.songEndTimeTv.text = String.format("%02d:%02d", song.playTime /60, song.playTime%60)
-        binding.songProgressSb.progress = (song.second *1000/song.playTime)
+        binding.songProgressSb.progress = (song.second*100/song.playTime)
 
         val music = resources.getIdentifier(song.music, "raw", this.packageName)
         mediaPlayer = MediaPlayer.create(this, music)
@@ -144,9 +144,9 @@ class SongActivity : AppCompatActivity() {
                 while(second<playTime){
                     if(isPlaying){
                         Thread.sleep(1000)
-                        mills += 50
+                        mills += 1000
                         runOnUiThread(){
-                            binding.songProgressSb.progress = ((second /playTime)*100).toInt()
+                            binding.songProgressSb.progress = ((mills /playTime)*100).toInt()
                             binding.songStartTimeTv.text =
                                 String.format("%02d:%02d", second / 60, second % 60)
                             binding.songEndTimeTv.text =
