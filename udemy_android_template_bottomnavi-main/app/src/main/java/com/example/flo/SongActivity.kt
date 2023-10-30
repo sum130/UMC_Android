@@ -49,6 +49,17 @@ class SongActivity : AppCompatActivity() {
         binding.songPauseIv.setOnClickListener{
             setPlayerStatus(false)
         }
+
+
+        binding.songMiniplayerIv.setOnClickListener {
+            setPlayerStatus(false)
+            timer.stopTimer()
+
+            timer = Timer(song.playTime, song.isPlaying)
+            timer.start()
+
+            setPlayerStatus(true)
+        }
     }
 
     //사용자가 포커스를 잃었을 때 음악이 중지
@@ -129,14 +140,22 @@ class SongActivity : AppCompatActivity() {
     }
 
 
+
+
     private fun startTimer(){
         timer = Timer(song.playTime, song.isPlaying)
         timer.start()
     }
+
     inner class Timer(private val playTime : Int, var isPlaying: Boolean = true):Thread(){
 
         private var second : Int = 0
         private var mills: Float = 0f
+
+        fun stopTimer(){
+            isPlaying = false
+            interrupt()
+        }
 
         override fun run(){
             super.run()
