@@ -72,8 +72,6 @@ class SongActivity : AppCompatActivity() {
         val songJson = gson.toJson(song)
         editor.putString("songData", songJson)
         editor.apply()
-
-
     }
 
     override fun onDestroy(){
