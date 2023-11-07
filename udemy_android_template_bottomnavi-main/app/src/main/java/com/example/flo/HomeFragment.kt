@@ -1,5 +1,6 @@
 package com.example.flo
 
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,7 +21,8 @@ class HomeFragment : Fragment() {
     lateinit var binding: FragmentHomeBinding
     private val timer = Timer()
     private val handler = Handler(Looper.getMainLooper())
-    private  var albumDatas = ArrayList<Album>()
+    private var albumDatas = ArrayList<Album>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,6 +53,7 @@ class HomeFragment : Fragment() {
         binding.homeTodayMusicAlbumRv.adapter = albumRVAdapter
         binding.homeTodayMusicAlbumRv.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
 
+
         albumRVAdapter.setMyItemClickListener(object: AlbumRVAdapter.MyItemClickListener{
             override fun onItemClick(album: Album) {
                 changeAlbumFragment(album)
@@ -60,6 +63,9 @@ class HomeFragment : Fragment() {
                 albumRVAdapter.removeItem(position)
             }
 
+            override fun onPlaySong(position: Int){
+                albumRVAdapter.onPlaySong(position)
+            }
         })
 
 
@@ -81,6 +87,8 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
+
+
 
     private fun changeAlbumFragment(album: Album) {
         (context as MainActivity).supportFragmentManager.beginTransaction()

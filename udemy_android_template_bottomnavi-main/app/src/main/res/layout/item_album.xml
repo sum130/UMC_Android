@@ -22,8 +22,16 @@
             android:src="@drawable/img_album_exp2"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+        />
     </androidx.cardview.widget.CardView>
-
+    <ImageView
+        android:id="@+id/item_album_cover_play_iv"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/widget_black_play"
+        app:layout_constraintEnd_toEndOf="@+id/item_album_cover_img_cardView"
+        app:layout_constraintBottom_toBottomOf="@+id/item_album_cover_img_cardView"/>
     <TextView
         android:id="@+id/item_album_title_tv"
         android:layout_width="wrap_content"
