@@ -32,20 +32,21 @@ class MainActivity : AppCompatActivity() {
         setTheme(R.style.Theme_FLO)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        inputDummySongs()
 
         //val song = Song(binding.mainMiniplayerTitleTv.text.toString(), binding.mainMiniplayerSingerTv.text.toString(), 0,60,false, "bam")
 
 
         binding.mainPlayerCl.setOnClickListener{
-            //startActivity(Intent(this, SongActivity::class.java))
+            val editor = getSharedPreferences("song", MODE_PRIVATE).edit()
+            editor.putInt("songId", song.id)
+            editor.apply()
+
             val intent = Intent(this, SongActivity::class.java)
-            intent.putExtra("title", song.title)
-            intent.putExtra("singer", song.singer)
-            intent.putExtra("second", song.second)
-            intent.putExtra("playTime", song.playTime)
-            intent.putExtra("isPlaying", song.isPlaying)
-            intent.putExtra("music", song.music)
             startActivity(intent)
+
+
+
         }
 
         getResultText.launch(intent)
@@ -100,16 +101,50 @@ class MainActivity : AppCompatActivity() {
         binding.mainMiniplayerTitleTv.text = song.title
         binding.seekBar.progress = (song.second*1000)/song.playTime
     }
+
+    private fun inputDummySongs(){
+        val songDB = SongDatabase.getInstance(this)
+        val songs = songDB!!.songDao().getSongs()
+
+        if(songs.isNotEmpty()) return
+
+        songDB.songDao().insert(
+            Song(
+                "BBoom BBoom",
+                "모모랜드 (MOMOLAND)",
+                0,
+                240,
+                false,
+                "music_lilac_",
+                R.drawable.img_album_exp,
+                false,
+            )
+        )
+        val _songs = songDB.songDao().getSongs()
+        Log.d("DB data", _songs.toString())
+    }
+
     override fun onStart() {
         super.onStart()
-        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
-        val songJson = sharedPreferences.getString("songData", null)
+//        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)
+//        val songJson = sharedPreferences.getString("songData", null)
+//
+//        song = if(songJson ==null){
+//            Song("밤", "dori", 0, 60, false, "bam")
+//        }else{
+//            gson.fromJson(songJson, Song::class.java)
+//        }
+        val spf = getSharedPreferences("song", MODE_PRIVATE)
+        val songId = spf.getInt("songId", 0)
 
-        song = if(songJson ==null){
-            Song("밤", "dori", 0, 60, false, "bam")
+        val  songDB = SongDatabase.getInstance(this)!!
+
+        song = if(songId == 0){
+            songDB.songDao().getSong(1)
         }else{
-            gson.fromJson(songJson, Song::class.java)
+            songDB.songDao().getSong(songId)
         }
+        Log.d("song ID", song.id.toString())
 
         setMiniPlayer(song)
 
