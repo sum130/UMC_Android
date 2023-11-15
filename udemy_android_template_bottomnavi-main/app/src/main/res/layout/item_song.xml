@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -63,14 +62,6 @@
         android:textSize="15sp"
         app:layout_constraintStart_toEndOf="@+id/item_locker_music_img_cardView"
         app:layout_constraintTop_toBottomOf="@+id/item_locker_title_tv"/>
-
-
-
-
-
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

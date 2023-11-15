@@ -19,9 +19,9 @@ abstract class SongDatabase: RoomDatabase() {
                     instance = Room.databaseBuilder(
                         context.applicationContext,
                         SongDatabase::class.java,
-                        "song-database"
-                    ).allowMainThreadQueries().build()
-                }
+                "song-database"
+                ).allowMainThreadQueries().build()
+            }
             }
             return instance
         }

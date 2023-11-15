@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.flo.databinding.FragmentLockerBinding
 import com.google.android.material.tabs.TabLayoutMediator
 import java.util.concurrent.locks.Lock
+import androidx.viewpager2.widget.ViewPager2
+
 
 class LockerFragment : Fragment() {
 
@@ -50,8 +52,8 @@ class LockerFragment : Fragment() {
 
 
         val lockerAdapter = LockerVPAdapter(this)
-        binding.lockerContentVp.adapter =  lockerAdapter
-        TabLayoutMediator(binding.restoreContentTb, binding.lockerContentVp){
+        binding.restoreContentVp.adapter = lockerAdapter
+        TabLayoutMediator(binding.restoreContentTb, binding.restoreContentVp){
                 tab, position ->
             tab.text = information[position]
         }.attach()
