@@ -5,15 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.flo.databinding.ActivityLoginBinding
+import com.example.flo.databinding.ActivityLogoinBinding
 
 
 class LoginActivity : AppCompatActivity() {
-    lateinit var binding: ActivityLoginBinding
+    lateinit var binding: ActivityLogoinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityLoginBinding.inflate(layoutInflater)
+        binding = ActivityLogoinBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.loginSignUpTv.setOnClickListener {

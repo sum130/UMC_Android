@@ -56,14 +56,14 @@ class LockerFragment : Fragment() {
 
 
         val lockerAdapter = LockerVPAdapter(this)
-        binding.restoreContentVp.adapter = lockerAdapter
-        TabLayoutMediator(binding.lockerContentTb, binding.lockerContentVp){
+        binding.locekrContentVp.adapter = lockerAdapter
+        TabLayoutMediator(binding.lockerContentTb, binding.locekrContentVp){
                 tab, position ->
             tab.text = information[position]
         }.attach()
 
 
-        binding.lockerLoginTv.setOnClickListener {
+        binding.loginTv.setOnClickListener {
             startActivity(Intent(activity, LoginActivity::class.java))
         }
 
@@ -82,16 +82,16 @@ class LockerFragment : Fragment() {
         val jwt: Int = getJwt()
 
         if (jwt == 0){
-            binding.lockerLoginTv.text = "로그인"
+            binding.loginTv.text = "로그인"
 
-            binding.lockerLoginTv.setOnClickListener {
+            binding.loginTv.setOnClickListener {
                 startActivity(Intent(activity, LoginActivity::class.java))
             }
         }
         else{
-            binding.lockerLoginTv.text = "로그아웃"
+            binding.loginTv.text = "로그아웃"
 
-            binding.lockerLoginTv.setOnClickListener {
+            binding.loginTv.setOnClickListener {
                 logout()
                 startActivity(Intent(activity, MainActivity::class.java))
             }

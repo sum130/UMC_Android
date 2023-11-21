@@ -7,7 +7,7 @@
 
 
     <TextView
-        android:id="@+id/restoreTv"
+        android:id="@+id/lockerTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -34,7 +34,7 @@
         />
 
     <TextView
-        android:id="@+id/restoreMusic"
+        android:id="@+id/lockerMusic"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,40 +43,40 @@
         android:textSize="20sp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/restoreTv"
+        app:layout_constraintTop_toBottomOf="@+id/lockerTv"
         />
 
     <TextView
         android:id="@+id/musicFile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toEndOf="@+id/restoreMusic"
+        app:layout_constraintStart_toEndOf="@+id/lockerMusic"
         android:text="음악파일"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:layout_marginTop="20dp"
         android:layout_marginStart="20dp"
-        app:layout_constraintTop_toBottomOf="@+id/restoreTv"
+        app:layout_constraintTop_toBottomOf="@+id/lockerTv"
         />
 
     <com.google.android.material.tabs.TabLayout
-        android:id="@+id/restore_content_tb"
+        android:id="@+id/locker_content_tb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabIndicatorFullWidth="false"
         app:tabIndicatorColor="#3f3fff"
         app:tabSelectedTextColor="#3f3fff"
         app:tabRippleColor="#00ff0000"
-        app:layout_constraintTop_toBottomOf="@+id/restoreMusic"
-        app:layout_constraintStart_toStartOf="@+id/restoreMusic"
+        app:layout_constraintTop_toBottomOf="@+id/lockerMusic"
+        app:layout_constraintStart_toStartOf="@+id/lockerMusic"
         app:layout_constraintEnd_toEndOf="@+id/loginTv"/>
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/restore_content_vp"
+        android:id="@+id/locekr_content_vp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/restore_content_tb"
+        app:layout_constraintTop_toBottomOf="@+id/locker_content_tb"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -88,6 +88,6 @@
         tools:listitem="@layout/item_locker_music"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/restore_content_tb"/>
+        app:layout_constraintTop_toBottomOf="@+id/locker_content_tb"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
