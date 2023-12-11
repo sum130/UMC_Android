@@ -18,5 +18,6 @@ data class Song(
     var isLike: Boolean = false,
     var albumIdx: Int? = null
 ){
+    
     @PrimaryKey(autoGenerate = true) var id: Int = 0
 }
