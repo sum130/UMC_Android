@@ -124,6 +124,13 @@ class MainActivity : AppCompatActivity() {
         Log.d("DB data", _songs.toString())
     }
 
+
+    private fun getjwt(): String?{
+        val spf = this.getSharedPreferences("auth", AppCompatActivity.MODE_PRIVATE)
+        return spf!!.getString("jwt", "")
+    }
+
+
     override fun onStart() {
         super.onStart()
 //        val sharedPreferences = getSharedPreferences("song", MODE_PRIVATE)

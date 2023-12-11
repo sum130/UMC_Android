@@ -8,7 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.flo.databinding.ActivityLogoinBinding
 
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity(), LoginView {
     lateinit var binding: ActivityLogoinBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,18 +39,22 @@ class LoginActivity : AppCompatActivity() {
         val email = binding.loginIdEt.text.toString() + "@" + binding.loginDirectInputEt.text.toString()
         val password = binding.loginPasswordEt.text.toString()
 
-        val songDB = SongDatabase.getInstance(this)!!
+//        val songDB = SongDatabase.getInstance(this)!!
+//
+//        //잘못된 유저 먼저 보여주
+//        val user = songDB.userDao().getUser(email, password)
+//
+//
+//        user?.let {
+//            Log.d("LOGIN_ACT/GET_USER", "userId: ${user.id}, $user")
+//            //saveJwt(user.id)
+//
+//            startMainActivity()
+//        }
+        val authService = AuthService()
+        authService.setLoginView(this)
 
-        //잘못된 유저 먼저 보여주
-        val user = songDB.userDao().getUser(email, password)
-
-
-        user?.let {
-            Log.d("LOGIN_ACT/GET_USER", "userId: ${user.id}, $user")
-            saveJwt(user.id)
-
-            startMainActivity()
-        }
+        authService.login(User(email,password,""))
 
         Toast.makeText(this, "회원 정보가 존재하지 않습니다.", Toast.LENGTH_SHORT).show()
     }
@@ -60,11 +64,31 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun saveJwt(jwt: Int) {
-        val spf = getSharedPreferences("auth" , MODE_PRIVATE)
+//    private fun saveJwt(jwt: Int) {
+//        val spf = getSharedPreferences("auth" , MODE_PRIVATE)
+//        val editor = spf.edit()
+//
+//        editor.putInt("jwt", jwt)
+//        editor.apply()
+//    }
+    private fun saveJwt2(jwt: String) {
+        val spf = getSharedPreferences("auth2" , MODE_PRIVATE)
         val editor = spf.edit()
 
-        editor.putInt("jwt", jwt)
+        editor.putString("jwt", jwt)
         editor.apply()
+    }
+
+    override fun onLoginSuccess(code: Int, result:Result) {
+        when(code){
+            1000-> {
+                saveJwt2(result.jwt)
+                startMainActivity()
+            }
+        }
+    }
+
+    override fun onLoginFailure() {
+        TODO("Not yet implemented")
     }
 }
